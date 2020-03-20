@@ -6,16 +6,13 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
 
-    private Transform[] _points;
+    private List<Transform> _points;
 
     private void Start()
     {
-        int countCopmonents = GetComponentsInChildren<Transform>().Length;
-        _points = new Transform[countCopmonents - 1];
-        for (int i = 0; i < _points.Length; i++)
-        {
-            _points[i] = GetComponentsInChildren<Transform>()[i + 1];
-        }
+        _points = new List<Transform>();
+        GetComponentsInChildren<Transform>(_points);
+        _points.RemoveAt(0);
         StartCoroutine(SpawnEnemy());
     }
 
@@ -26,7 +23,7 @@ public class Spawner : MonoBehaviour
 
         while (true)
         {
-            numberPoint = Random.Range(0, _points.Length);
+            numberPoint = Random.Range(0, _points.Count);
             Instantiate(_enemy, _points[numberPoint]);
             yield return new WaitForSeconds(countSeconds);
         }
@@ -36,7 +33,7 @@ public class Spawner : MonoBehaviour
     {
         if (collision.GetComponent<Enemy>())
         {
-            collision.GetComponent<Enemy>().DeleteSelf();
+            collision.GetComponent<Enemy>().Die();
         }
     }
 }

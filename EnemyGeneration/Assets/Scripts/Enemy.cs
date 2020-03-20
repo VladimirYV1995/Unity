@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
         _enemy.Translate(Vector2.up * _speed * Time.deltaTime);
     }
 
-    public void DeleteSelf()
+    public void Die()
     {
         Destroy(gameObject);
     }
