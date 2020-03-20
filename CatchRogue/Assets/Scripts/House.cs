@@ -5,7 +5,7 @@ using UnityEngine;
 public class House : MonoBehaviour
 {
     [SerializeField] private Door _door;
-
+   
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.GetComponent<Thief>())
@@ -20,5 +20,5 @@ public class House : MonoBehaviour
         {
             _door.OffAlarm();
         }
-    }    
+    } 
 }

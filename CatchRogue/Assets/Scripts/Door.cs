@@ -10,7 +10,10 @@ public class Door : MonoBehaviour
     public void OnAlarm()
     {
         _alarm.Play();
-        _changeVolume = StartCoroutine(ChangeVolume());
+        if (_changeVolume == null)
+        {
+            _changeVolume = StartCoroutine(ChangeVolume());
+        }
     }
 
     public void OffAlarm()
